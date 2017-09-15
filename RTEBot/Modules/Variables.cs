@@ -23,10 +23,8 @@ namespace RTEBot.Modules
             }
             return buffer;
         }
-        public static GameShark GS { get { return new GameShark(); } }
-        private static CCAPI CCAPI { get { return new CCAPI(); } }
+        public static uint[] Ranges = { 0x30000000, 0x40000000 };
         public static Boolean IsConnected { get; set; }
-        public static string _IP = "192.168.0.13";
         public static String[] Admins = { "Cain532", "iHawe", "Luckeyy" };
     }
 }

@@ -6,24 +6,32 @@ using System.Text;
 using System.Threading.Tasks;
 using MultiLib;
 
-
 namespace RTEBot.Modules
 {
     public class PS3 : ModuleBase<SocketCommandContext>
     {
-        public MultiConsoleAPI _PS3 = new MultiConsoleAPI(SelectAPI.ControlConsole);
+        public static GameShark GS { get { return new GameShark(); } }
+        private static CCAPI CCAPI { get { return new CCAPI(); } }
+        public Extension Extension { get { return new Extension(SelectAPI.ControlConsole); } }
+
         public async void SendMessage(string input)
         {
             await Context.Channel.SendMessageAsync(input);
         }
-        private Boolean ConnectPSX(string IP = "192.168.0.13")
+
+        public short SwitchInt16(short input)
         {
-            _PS3.ChangeAPI(SelectAPI.ControlConsole);
-            if(_PS3.GameShark.Connect(IP)) return true;
-            else return false;
+            return (short)((input << 8) + (input >> 8));
         }
 
+
+        private Boolean ConnectPSX(string IP = "192.168.0.13")
+        {
+            if (GS.Connect(IP)) return true;
+            else return false;
+        }
         [Command("Connect")]
+        [RequireOwner]
         public async Task _Connect()
         {
             if (!Variables.IsConnected)
@@ -39,9 +47,13 @@ namespace RTEBot.Modules
         [Command("WriteGSMem")]
         public async Task GS_Send(string input, string input2)
         {
+            uint buffer = Convert.ToUInt32(input, 16);
             if (Variables.IsConnected)
             {
-                ConnectPSX(); _PS3.GameShark.GSWrite(input, input2);
+                if (buffer < Variables.Ranges[1] && buffer > Variables.Ranges[0])
+                    GS.GSWrite(input, input2);
+                else
+                    SendMessage("Range is incompatible! Please consult Cain532");
             }
             else
                 SendMessage("Console is offline");
@@ -49,9 +61,11 @@ namespace RTEBot.Modules
         [Command("WriteGSMem")]
         public async Task GS_Send(string input)
         {
+            uint buffer = Convert.ToUInt32(input, 16);
+
             if (Variables.IsConnected)
             {
-                ConnectPSX(); _PS3.GameShark.GSWrite(input);
+                    GS.GSWrite(input);
             }
             else
                 SendMessage("Console is offline");
@@ -59,14 +73,65 @@ namespace RTEBot.Modules
         [Command("WriteMem")]
         public async Task _Send(string address, string bytes)
         {
+            uint buffer = Convert.ToUInt32(address, 16);
             if (Variables.IsConnected)
             {
-                uint buffer = Convert.ToUInt32(address, 16);
-                byte[] array = Variables.STB(bytes);
-                _PS3.Extension.WriteBytes(buffer, array);
+                    uint buffer2 = Convert.ToUInt32(address, 16);
+                    byte[] array = Variables.STB(bytes);
+                    Extension.WriteBytes(buffer, array);
             }
             else
                 SendMessage("Console is offline");
+        }
+        [Command("ReadMem")]
+        public async Task _Read(string input)
+        {
+            uint buffer = Convert.ToUInt32(input, 16);
+            if (Variables.IsConnected)
+            {
+                SendMessage(BitConverter.ToString(Extension.ReadBytes(buffer, 2)));
+            }
+        }
+        [Command("ReadMem")]
+        public async Task _Read(string input, string length = "2")
+        {
+            uint buffer = Convert.ToUInt32(input, 16);
+            if (Variables.IsConnected)
+            {
+                SendMessage(BitConverter.ToString(Extension.ReadBytes(buffer, int.Parse(length))));
+            }
+        }
+        [Command("ReadString")]
+        public async Task _ReadS(string address)
+        {
+            uint buffer = Convert.ToUInt32(address, 16);
+            if (Variables.IsConnected)
+            {
+                SendMessage(Extension.ReadString(buffer));
+            }
+        }
+        [Command("Disconnect")]
+        [RequireOwner]
+        public async Task _T()
+        {
+            Context.Client.LogoutAsync();
+
+        }
+        [Command("GiveSnakeSocom")]
+        public async Task _Socom()
+        {
+            if (Variables.IsConnected)
+                Extension.WriteBytes(0x382922, new byte[] { 0x55, 0x55 });
+            SendMessage(string.Format("Thank you, {0}! Snake now has a Socom", Context.User.Username));
+        }
+
+        [Command("CheckHealth")]
+        [Alias("GetHealth", "HP")]
+        public async Task GHealth()
+        {
+            short current = Extension.ReadInt16(0x382916), max = Extension.ReadInt16(0x382918);
+            double per = (double)SwitchInt16(current)/ SwitchInt16(max);
+            SendMessage(string.Format("Snake has {0:0.0%} Health!", per));
         }
     }
 
