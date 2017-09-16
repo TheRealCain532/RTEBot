@@ -13,25 +13,22 @@ namespace RTEBot
     class CommandHandler
     {
         private DiscordSocketClient _Sclient;
-        private Discord.dis
         private CommandService _service;
-       
+        private SocketTextChannel _Channel => _Sclient.GetGuild(171311465167323137).GetTextChannel(358639287484547102);
+
 
         public CommandHandler(DiscordSocketClient client)
         {
+            _Sclient = client;
 
             _service = new CommandService();
 
             _service.AddModulesAsync(Assembly.GetEntryAssembly());
 
             _Sclient.MessageReceived += HandleCommandAsync;
-
             
         }
-        private async Task Log(object sender, Discord.LogMessage e)
-        {
 
-        }
         private async Task HandleCommandAsync(SocketMessage s)
         {
             var msg = s as SocketUserMessage;
@@ -40,12 +37,6 @@ namespace RTEBot
             var context = new SocketCommandContext(_Sclient, msg);
 
             int argPos = 0;
-            //for (int i = 0; i < Modules.Variables.Admins.Length; i++)
-            //    if (context.User.Username == Modules.Variables.Admins[i]) isAdmin = true;
-            //if (isAdmin)
-            //{            
-
-
             if (msg.HasCharPrefix('!', ref argPos))
                 {
                     var result = await _service.ExecuteAsync(context, argPos);
@@ -55,8 +46,6 @@ namespace RTEBot
                         await context.Channel.SendMessageAsync("Something went Horribly Wrong!\n\nBut don't worry, we are working to fix it\n\n" + result.ErrorReason);
                     }
                 }
-            //}
-
         }
 
 

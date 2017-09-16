@@ -23,8 +23,19 @@ namespace RTEBot.Modules
             }
             return buffer;
         }
-        public static uint[] Ranges = { 0x30000000, 0x40000000 };
         public static Boolean IsConnected { get; set; }
-        public static String[] Admins = { "Cain532", "iHawe", "Luckeyy" };
+        public enum MGSWeapons : uint
+        {
+            Socom = 0x382922,
+            Famas = 0x382924,
+            Grenade = 0x382926,
+            Nikita = 0x382928,
+            Stinger = 0x38292A,
+            Claymore = 0x38292C,
+            C4 = 0x38292E,
+            Stun_G = 0x382930,
+            Chaff_G = 0x382932,
+            PSG1 = 0x382934
+        }
     }
 }
