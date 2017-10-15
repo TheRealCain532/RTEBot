@@ -138,6 +138,74 @@ namespace RTEBot.Games
                 }
             }
         }
+        [Command("Giveitem")]
+        [Alias("Give")]
+        public async Task _GiveItem(string Weap)
+        {
+            if (Variables.IsConnected)
+            {
+                byte[] give = { 0x14, 0x00 };
+                switch (Weap)
+                {
+                    case "Socom": GiveWeapon(MGS.Socom, Weap); break;
+                    case "socom": GiveWeapon(MGS.Socom, Weap); break;
+                    case "Famas": GiveWeapon(MGS.Famas, Weap); break;
+                    case "famas": GiveWeapon(MGS.Famas, Weap); break;
+                    case "Grenade": GiveWeapon(MGS.Grenade, Weap); break;
+                    case "grenade": GiveWeapon(MGS.Grenade, Weap); break;
+                    case "Nikita": GiveWeapon(MGS.Nikita, Weap); break;
+                    case "nikita": GiveWeapon(MGS.Nikita, Weap); break;
+                    case "Stinger": GiveWeapon(MGS.Stinger, Weap); break;
+                    case "stinger": GiveWeapon(MGS.Stinger, Weap); break;
+                    case "Claymore": GiveWeapon(MGS.Claymore, Weap); break;
+                    case "claymore": GiveWeapon(MGS.Claymore, Weap); break;
+                    case "C4": GiveWeapon(MGS.C4, Weap); break;
+                    case "c4": GiveWeapon(MGS.C4, Weap); break;
+                    case "Stun Grenade": GiveWeapon(MGS.Stun_G, Weap); break;
+                    case "stun grenade": GiveWeapon(MGS.Stun_G, Weap); break;
+                    case "Chaff Grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
+                    case "chaff grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
+                    case "PSG1": GiveWeapon(MGS.PSG1, Weap); break;
+                    case "psg1": GiveWeapon(MGS.PSG1, Weap); break;
+                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
+                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
+                }
+            }
+        }
+        [Command("Takeitem")]
+        [Alias("Take")]
+        public async Task _Takeitem(string Weap)
+        {
+            if (Variables.IsConnected)
+            {
+                byte[] take = { 0xFF, 0xFF };
+                switch (Weap)
+                {
+                    case "Socom": TakeWeapon(MGS.Socom, Weap); break;
+                    case "socom": TakeWeapon(MGS.Socom, Weap); break;
+                    case "Famas": TakeWeapon(MGS.Famas, Weap); break;
+                    case "famas": TakeWeapon(MGS.Famas, Weap); break;
+                    case "Grenade": TakeWeapon(MGS.Grenade, Weap); break;
+                    case "grenade": TakeWeapon(MGS.Grenade, Weap); break;
+                    case "Nikita": TakeWeapon(MGS.Nikita, Weap); break;
+                    case "nikita": TakeWeapon(MGS.Nikita, Weap); break;
+                    case "Stinger": TakeWeapon(MGS.Stinger, Weap); break;
+                    case "stinger": TakeWeapon(MGS.Stinger, Weap); break;
+                    case "Claymore": TakeWeapon(MGS.Claymore, Weap); break;
+                    case "claymore": TakeWeapon(MGS.Claymore, Weap); break;
+                    case "C4": TakeWeapon(MGS.C4, Weap); break;
+                    case "c4": TakeWeapon(MGS.C4, Weap); break;
+                    case "Stun Grenade": TakeWeapon(MGS.Stun_G, Weap); break;
+                    case "stun grenade": TakeWeapon(MGS.Stun_G, Weap); break;
+                    case "Chaff Grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
+                    case "chaff grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
+                    case "PSG1": TakeWeapon(MGS.PSG1, Weap); break;
+                    case "psg1": TakeWeapon(MGS.PSG1, Weap); break;
+                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
+                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
+                }
+            }
+        }
         [Command("CheckHealth")]
         [Alias("GetHealth", "HP")]
         public async Task GHealth()
@@ -154,6 +222,12 @@ namespace RTEBot.Games
             short max = Extension.ReadInt16(0x382918);
             Extension.WriteInt16(0x382916, max);
         }
-        
+        [Command("KillSnake")]
+        [Alias("Kill Snake")]
+        public async Task KillSnke()
+        {
+            Extension.WriteBytes(0x38296E, new byte[] { 0x01, 0x00 });
+            SendMessage(string.Format("{0}, you killed Snake! You Bastard!", Context.User.Username));
+        }
     }
 }
