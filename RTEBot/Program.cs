@@ -23,10 +23,9 @@ namespace RTEBot
         public async Task StartAsync()
         {
             _client = new DiscordSocketClient();
-            var token = "MzU3OTQ5ODU4MTYzODUxMjgx.DJxYJg.0GhS-jgWzDo_2p2_N_Ztd9ux7fQ";
+
+            var token = "MzU3OTQ5ODU4MTYzODUxMjgx.DKHQLQ.5AKi_aMvBFQ9VMUsMkV0RqOGFU0";
             await _client.LoginAsync(TokenType.Bot, token);
-
-
 
             await _client.StartAsync();
 

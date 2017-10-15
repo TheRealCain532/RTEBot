@@ -10,15 +10,8 @@ using MultiLib;
 
 namespace RTEBot.Games
 {
-    class MGS_PSX : ModuleBase<SocketCommandContext>
+    public class MGS_PSX : ModuleBase<SocketCommandContext>
     {
-        DiscordSocketClient _client;
-        public MGS_PSX(DiscordSocketClient client)
-        {
-            client = _client;
-        }
-        public GameShark GS { get { return new GameShark(); } }
-        public CCAPI CCAPI { get { return new CCAPI(); } }
         public Extension Extension { get { return new Extension(SelectAPI.ControlConsole); } }
         public async void SendMessage(string input)
         {
@@ -41,38 +34,81 @@ namespace RTEBot.Games
             Chaff_G = 0x382932,
             PSG1 = 0x382934
         }
-
+        public void GiveWeapon(MGS address, string Weapon)
+        {
+            Extension.WriteBytes((uint)address, new byte[] { 0x10, 0x00 });
+            SendMessage(string.Format("{0}, Given! Thanks {1}!!", Weapon, Context.User.Mention));
+        }
+        public void TakeWeapon(MGS address, string Weapon)
+        {
+            Extension.WriteBytes((uint)address, new byte[] { 0xFF, 0xFF});
+            SendMessage(string.Format("{{1} Took your {0}!", Weapon, Context.User.Mention));
+        }
         [Command("GiveWeapon")]
         [Alias("Give")]
-        public async Task GiveWeapon(string Weap)
+        public async Task _GiveWeapon(string Weap)
         {
             if (Variables.IsConnected)
             {
                 byte[] give = { 0x10, 0x00 };
                 switch (Weap)
                 {
-                    case "Socom": Extension.WriteBytes((uint)MGS.Socom, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "Famas": Extension.WriteBytes((uint)MGS.Famas, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "Greanade": Extension.WriteBytes((uint)MGS.Grenade, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "Nikita": Extension.WriteBytes((uint)MGS.Nikita, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "Stinger": Extension.WriteBytes((uint)MGS.Stinger, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "Claymore": Extension.WriteBytes((uint)MGS.Claymore, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "C4": Extension.WriteBytes((uint)MGS.C4, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "Stun Grenade": Extension.WriteBytes((uint)MGS.Stun_G, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "Chaff Grenade": Extension.WriteBytes((uint)MGS.Chaff_G, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "PSG1": Extension.WriteBytes((uint)MGS.PSG1, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "socom": Extension.WriteBytes((uint)MGS.Socom, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "famas": Extension.WriteBytes((uint)MGS.Famas, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "greanade": Extension.WriteBytes((uint)MGS.Grenade, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "nikita": Extension.WriteBytes((uint)MGS.Nikita, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "stinger": Extension.WriteBytes((uint)MGS.Stinger, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "claymore": Extension.WriteBytes((uint)MGS.Claymore, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "c4": Extension.WriteBytes((uint)MGS.C4, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "stun grenade": Extension.WriteBytes((uint)MGS.Stun_G, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "chaff grenade": Extension.WriteBytes((uint)MGS.Chaff_G, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "psg1": Extension.WriteBytes((uint)MGS.PSG1, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
+                    case "Socom": GiveWeapon(MGS.Socom, Weap); break;
+                    case "socom": GiveWeapon(MGS.Socom, Weap); break;
+                    case "Famas": GiveWeapon(MGS.Famas, Weap); break;
+                    case "famas": GiveWeapon(MGS.Famas, Weap); break;
+                    case "Grenade": GiveWeapon(MGS.Grenade, Weap); break;
+                    case "grenade": GiveWeapon(MGS.Grenade, Weap); break;
+                    case "Nikita": GiveWeapon(MGS.Nikita, Weap); break;
+                    case "nikita": GiveWeapon(MGS.Nikita, Weap); break;
+                    case "Stinger": GiveWeapon(MGS.Stinger, Weap); break;
+                    case "stinger": GiveWeapon(MGS.Stinger, Weap); break;
+                    case "Claymore": GiveWeapon(MGS.Claymore, Weap); break;
+                    case "claymore": GiveWeapon(MGS.Claymore, Weap); break;
+                    case "C4": GiveWeapon(MGS.C4, Weap); break;
+                    case "c4": GiveWeapon(MGS.C4, Weap); break;
+                    case "Stun Grenade": GiveWeapon(MGS.Stun_G, Weap); break;
+                    case "stun grenade": GiveWeapon(MGS.Stun_G, Weap); break;
+                    case "Chaff Grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
+                    case "chaff grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
+                    case "PSG1": GiveWeapon(MGS.PSG1, Weap); break;
+                    case "psg1": GiveWeapon(MGS.PSG1, Weap); break;
                     case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
                     case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
+                }
+            }
+        }
+        [Command("TakeWeapon")]
+        [Alias("Take")]
+        public async Task _TakeWeapon(string Weap)
+        {
+            if (Variables.IsConnected)
+            {
+                byte[] take = { 0xFF, 0xFF };
+                switch (Weap)
+                {
+                    case "Socom": TakeWeapon(MGS.Socom, Weap); break;
+                    case "socom": TakeWeapon(MGS.Socom, Weap); break;
+                    case "Famas": TakeWeapon(MGS.Famas, Weap); break;
+                    case "famas": TakeWeapon(MGS.Famas, Weap); break;
+                    case "Grenade": TakeWeapon(MGS.Grenade, Weap); break;
+                    case "grenade": TakeWeapon(MGS.Grenade, Weap); break;
+                    case "Nikita": TakeWeapon(MGS.Nikita, Weap); break;
+                    case "nikita": TakeWeapon(MGS.Nikita, Weap); break;
+                    case "Stinger": TakeWeapon(MGS.Stinger, Weap); break;
+                    case "stinger": TakeWeapon(MGS.Stinger, Weap); break;
+                    case "Claymore": TakeWeapon(MGS.Claymore, Weap); break;
+                    case "claymore": TakeWeapon(MGS.Claymore, Weap); break;
+                    case "C4": TakeWeapon(MGS.C4, Weap); break;
+                    case "c4": TakeWeapon(MGS.C4, Weap); break;
+                    case "Stun Grenade": TakeWeapon(MGS.Stun_G, Weap); break;
+                    case "stun grenade": TakeWeapon(MGS.Stun_G, Weap); break;
+                    case "Chaff Grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
+                    case "chaff grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
+                    case "PSG1": TakeWeapon(MGS.PSG1, Weap); break;
+                    case "psg1": TakeWeapon(MGS.PSG1, Weap); break;
+                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1}Took EVERYTHING!!", Weap, Context.User.Mention)); break;
+                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1}Took EVERYTHING!!", Weap, Context.User.Mention)); break;
                 }
             }
         }

@@ -14,8 +14,6 @@ namespace RTEBot
     {
         private DiscordSocketClient _Sclient;
         private CommandService _service;
-        private SocketTextChannel _Channel => _Sclient.GetGuild(171311465167323137).GetTextChannel(358639287484547102);
-
 
         public CommandHandler(DiscordSocketClient client)
         {
@@ -26,7 +24,6 @@ namespace RTEBot
             _service.AddModulesAsync(Assembly.GetEntryAssembly());
 
             _Sclient.MessageReceived += HandleCommandAsync;
-            
         }
 
         private async Task HandleCommandAsync(SocketMessage s)

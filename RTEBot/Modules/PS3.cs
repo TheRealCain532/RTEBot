@@ -21,12 +21,12 @@ namespace RTEBot.Modules
 
         private Boolean ConnectPSX(string IP = "192.168.0.13")
         {
-            if (GS.Connect(IP)) return true;
+            if (GS.Connect()) return true;
             else return false;
         }
 
         [Command("Connect")]
-        [RequireOwner]
+        [RequireUserPermission(Discord.GuildPermission.Administrator)]
         public async Task _Connect()
         {
             if (!Variables.IsConnected)
@@ -58,6 +58,8 @@ namespace RTEBot.Modules
             uint buffer = Convert.ToUInt32(input, 16);
             if (Variables.IsConnected)
                 SendMessage(BitConverter.ToString(Extension.ReadBytes(buffer, 2)));
+            else
+                SendMessage("Console is offline");
         }
         [Command("ReadMem")]
         public async Task _Read(string input, string length = "2")
@@ -65,6 +67,8 @@ namespace RTEBot.Modules
             uint buffer = Convert.ToUInt32(input, 16);
             if (Variables.IsConnected)
                 SendMessage(BitConverter.ToString(Extension.ReadBytes(buffer, int.Parse(length))));
+            else
+                SendMessage("Console is offline");
         }
         [Command("ReadString")]
         public async Task _ReadS(string address)
@@ -72,6 +76,8 @@ namespace RTEBot.Modules
             uint buffer = Convert.ToUInt32(address, 16);
             if (Variables.IsConnected)
                 SendMessage(Extension.ReadString(buffer));
+            else
+                SendMessage("Console is offline");
         }
         [Command("Disconnect")]
         [RequireOwner]
