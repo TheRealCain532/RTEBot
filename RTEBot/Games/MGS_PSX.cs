@@ -73,8 +73,8 @@ namespace RTEBot.Games
                     case "chaff grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
                     case "PSG1": GiveWeapon(MGS.PSG1, Weap); break;
                     case "psg1": GiveWeapon(MGS.PSG1, Weap); break;
-                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
-                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{0} Given! Thanks {1}!!", Weap, Context.User.Mention)); break;
+                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
+                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
                 }
             }
         }
@@ -107,8 +107,8 @@ namespace RTEBot.Games
                     case "chaff grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
                     case "PSG1": TakeWeapon(MGS.PSG1, Weap); break;
                     case "psg1": TakeWeapon(MGS.PSG1, Weap); break;
-                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1}Took EVERYTHING!!", Weap, Context.User.Mention)); break;
-                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1}Took EVERYTHING!!", Weap, Context.User.Mention)); break;
+                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
+                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
                 }
             }
         }
