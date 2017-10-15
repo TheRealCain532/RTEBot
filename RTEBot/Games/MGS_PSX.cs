@@ -32,11 +32,37 @@ namespace RTEBot.Games
             C4 = 0x38292E,
             Stun_G = 0x382930,
             Chaff_G = 0x382932,
-            PSG1 = 0x382934
+            PSG1 = 0x382934,
+
+            Cig = 0x38294A,
+            Scope = 0x38294C,
+            CardboardBoxA = 0x38294E,
+            CardboardBoxB = 0x382950,
+            CardboardBoxC = 0x382952,
+            NVG = 0x382954,
+            ThermG = 0x382956,
+            GasM = 0x382958,
+            BodyArmor = 0x38295A,
+            Ketchup = 0x38295C,
+            Stealth = 0x38295E,
+            Bandanna = 0x382960,
+            Camera = 0x382962,
+            Ration = 0x382964,
+            Medicine = 0x382966,
+            Diazepam = 0x382968,
+            PalKey = 0x38296A,
+            KeyCard = 0x38296C,
+            //TimeBomb = 0x38296E,
+            MineDetector = 0x382970,
+            Disc = 0x382972,
+            Rope = 0x382974,
+            Handkerchief = 0x382976,
+            Suppressor = 0x382978,
         }
+
         public void GiveWeapon(MGS address, string Weapon)
         {
-            Extension.WriteBytes((uint)address, new byte[] { 0x10, 0x00 });
+            Extension.WriteBytes((uint)address, new byte[] { 0x14, 0x00 });
             SendMessage(string.Format("{0}, Given! Thanks {1}!!", Weapon, Context.User.Mention));
         }
         public void TakeWeapon(MGS address, string Weapon)
@@ -50,7 +76,7 @@ namespace RTEBot.Games
         {
             if (Variables.IsConnected)
             {
-                byte[] give = { 0x10, 0x00 };
+                byte[] give = { 0x14, 0x00 };
                 switch (Weap)
                 {
                     case "Socom": GiveWeapon(MGS.Socom, Weap); break;
@@ -112,11 +138,6 @@ namespace RTEBot.Games
                 }
             }
         }
-        [Command("GetCurrentWeapon")]
-        public async Task CurrentWeapon()
-        {
-
-        }
         [Command("CheckHealth")]
         [Alias("GetHealth", "HP")]
         public async Task GHealth()
@@ -125,5 +146,14 @@ namespace RTEBot.Games
             double per = (double)SwitchInt16(current) / SwitchInt16(max);
             SendMessage(string.Format("Snake has {0:0.0%} Health!", per));
         }
+
+        [Command("GiveHealth")]
+        [Alias("Give Health")]
+        public async Task GiveHealth()
+        {
+            short max = Extension.ReadInt16(0x382918);
+            Extension.WriteInt16(0x382916, max);
+        }
+        
     }
 }
