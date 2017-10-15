@@ -60,12 +60,13 @@ namespace RTEBot.Games
             Suppressor = 0x382978,
         }
 
-        public void GiveWeapon(MGS address, string Weapon)
+
+        public void Giveeth(MGS address, string Weapon)
         {
             Extension.WriteBytes((uint)address, new byte[] { 0x14, 0x00 });
             SendMessage(string.Format("{0}, Given! Thanks {1}!!", Weapon, Context.User.Mention));
         }
-        public void TakeWeapon(MGS address, string Weapon)
+        public void Taketh(MGS address, string Weapon)
         {
             Extension.WriteBytes((uint)address, new byte[] { 0xFF, 0xFF});
             SendMessage(string.Format("{{1} Took your {0}!", Weapon, Context.User.Mention));
@@ -79,28 +80,28 @@ namespace RTEBot.Games
                 byte[] give = { 0x14, 0x00 };
                 switch (Weap)
                 {
-                    case "Socom": GiveWeapon(MGS.Socom, Weap); break;
-                    case "socom": GiveWeapon(MGS.Socom, Weap); break;
-                    case "Famas": GiveWeapon(MGS.Famas, Weap); break;
-                    case "famas": GiveWeapon(MGS.Famas, Weap); break;
-                    case "Grenade": GiveWeapon(MGS.Grenade, Weap); break;
-                    case "grenade": GiveWeapon(MGS.Grenade, Weap); break;
-                    case "Nikita": GiveWeapon(MGS.Nikita, Weap); break;
-                    case "nikita": GiveWeapon(MGS.Nikita, Weap); break;
-                    case "Stinger": GiveWeapon(MGS.Stinger, Weap); break;
-                    case "stinger": GiveWeapon(MGS.Stinger, Weap); break;
-                    case "Claymore": GiveWeapon(MGS.Claymore, Weap); break;
-                    case "claymore": GiveWeapon(MGS.Claymore, Weap); break;
-                    case "C4": GiveWeapon(MGS.C4, Weap); break;
-                    case "c4": GiveWeapon(MGS.C4, Weap); break;
-                    case "Stun Grenade": GiveWeapon(MGS.Stun_G, Weap); break;
-                    case "stun grenade": GiveWeapon(MGS.Stun_G, Weap); break;
-                    case "Chaff Grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
-                    case "chaff grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
-                    case "PSG1": GiveWeapon(MGS.PSG1, Weap); break;
-                    case "psg1": GiveWeapon(MGS.PSG1, Weap); break;
-                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
-                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
+                    case "Socom": Giveeth(MGS.Socom, Weap); break;
+                    case "socom": Giveeth(MGS.Socom, Weap); break;
+                    case "Famas": Giveeth(MGS.Famas, Weap); break;
+                    case "famas": Giveeth(MGS.Famas, Weap); break;
+                    case "Grenade": Giveeth(MGS.Grenade, Weap); break;
+                    case "grenade": Giveeth(MGS.Grenade, Weap); break;
+                    case "Nikita": Giveeth(MGS.Nikita, Weap); break;
+                    case "nikita": Giveeth(MGS.Nikita, Weap); break;
+                    case "Stinger": Giveeth(MGS.Stinger, Weap); break;
+                    case "stinger": Giveeth(MGS.Stinger, Weap); break;
+                    case "Claymore": Giveeth(MGS.Claymore, Weap); break;
+                    case "claymore": Giveeth(MGS.Claymore, Weap); break;
+                    case "C4": Giveeth(MGS.C4, Weap); break;
+                    case "c4": Giveeth(MGS.C4, Weap); break;
+                    case "Stun Grenade": Giveeth(MGS.Stun_G, Weap); break;
+                    case "stun grenade": Giveeth(MGS.Stun_G, Weap); break;
+                    case "Chaff Grenade": Giveeth(MGS.Chaff_G, Weap); break;
+                    case "chaff grenade": Giveeth(MGS.Chaff_G, Weap); break;
+                    case "PSG1": Giveeth(MGS.PSG1, Weap); break;
+                    case "psg1": Giveeth(MGS.PSG1, Weap); break;
+                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
+                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
                 }
             }
         }
@@ -113,26 +114,26 @@ namespace RTEBot.Games
                 byte[] take = { 0xFF, 0xFF };
                 switch (Weap)
                 {
-                    case "Socom": TakeWeapon(MGS.Socom, Weap); break;
-                    case "socom": TakeWeapon(MGS.Socom, Weap); break;
-                    case "Famas": TakeWeapon(MGS.Famas, Weap); break;
-                    case "famas": TakeWeapon(MGS.Famas, Weap); break;
-                    case "Grenade": TakeWeapon(MGS.Grenade, Weap); break;
-                    case "grenade": TakeWeapon(MGS.Grenade, Weap); break;
-                    case "Nikita": TakeWeapon(MGS.Nikita, Weap); break;
-                    case "nikita": TakeWeapon(MGS.Nikita, Weap); break;
-                    case "Stinger": TakeWeapon(MGS.Stinger, Weap); break;
-                    case "stinger": TakeWeapon(MGS.Stinger, Weap); break;
-                    case "Claymore": TakeWeapon(MGS.Claymore, Weap); break;
-                    case "claymore": TakeWeapon(MGS.Claymore, Weap); break;
-                    case "C4": TakeWeapon(MGS.C4, Weap); break;
-                    case "c4": TakeWeapon(MGS.C4, Weap); break;
-                    case "Stun Grenade": TakeWeapon(MGS.Stun_G, Weap); break;
-                    case "stun grenade": TakeWeapon(MGS.Stun_G, Weap); break;
-                    case "Chaff Grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
-                    case "chaff grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
-                    case "PSG1": TakeWeapon(MGS.PSG1, Weap); break;
-                    case "psg1": TakeWeapon(MGS.PSG1, Weap); break;
+                    case "Socom": Taketh(MGS.Socom, Weap); break;
+                    case "socom": Taketh(MGS.Socom, Weap); break;
+                    case "Famas": Taketh(MGS.Famas, Weap); break;
+                    case "famas": Taketh(MGS.Famas, Weap); break;
+                    case "Grenade": Taketh(MGS.Grenade, Weap); break;
+                    case "grenade": Taketh(MGS.Grenade, Weap); break;
+                    case "Nikita": Taketh(MGS.Nikita, Weap); break;
+                    case "nikita": Taketh(MGS.Nikita, Weap); break;
+                    case "Stinger": Taketh(MGS.Stinger, Weap); break;
+                    case "stinger": Taketh(MGS.Stinger, Weap); break;
+                    case "Claymore": Taketh(MGS.Claymore, Weap); break;
+                    case "claymore": Taketh(MGS.Claymore, Weap); break;
+                    case "C4": Taketh(MGS.C4, Weap); break;
+                    case "c4": Taketh(MGS.C4, Weap); break;
+                    case "Stun Grenade": Taketh(MGS.Stun_G, Weap); break;
+                    case "stun grenade": Taketh(MGS.Stun_G, Weap); break;
+                    case "Chaff Grenade": Taketh(MGS.Chaff_G, Weap); break;
+                    case "chaff grenade": Taketh(MGS.Chaff_G, Weap); break;
+                    case "PSG1": Taketh(MGS.PSG1, Weap); break;
+                    case "psg1": Taketh(MGS.PSG1, Weap); break;
                     case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
                     case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
                 }
@@ -147,28 +148,55 @@ namespace RTEBot.Games
                 byte[] give = { 0x14, 0x00 };
                 switch (Weap)
                 {
-                    case "Socom": GiveWeapon(MGS.Socom, Weap); break;
-                    case "socom": GiveWeapon(MGS.Socom, Weap); break;
-                    case "Famas": GiveWeapon(MGS.Famas, Weap); break;
-                    case "famas": GiveWeapon(MGS.Famas, Weap); break;
-                    case "Grenade": GiveWeapon(MGS.Grenade, Weap); break;
-                    case "grenade": GiveWeapon(MGS.Grenade, Weap); break;
-                    case "Nikita": GiveWeapon(MGS.Nikita, Weap); break;
-                    case "nikita": GiveWeapon(MGS.Nikita, Weap); break;
-                    case "Stinger": GiveWeapon(MGS.Stinger, Weap); break;
-                    case "stinger": GiveWeapon(MGS.Stinger, Weap); break;
-                    case "Claymore": GiveWeapon(MGS.Claymore, Weap); break;
-                    case "claymore": GiveWeapon(MGS.Claymore, Weap); break;
-                    case "C4": GiveWeapon(MGS.C4, Weap); break;
-                    case "c4": GiveWeapon(MGS.C4, Weap); break;
-                    case "Stun Grenade": GiveWeapon(MGS.Stun_G, Weap); break;
-                    case "stun grenade": GiveWeapon(MGS.Stun_G, Weap); break;
-                    case "Chaff Grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
-                    case "chaff grenade": GiveWeapon(MGS.Chaff_G, Weap); break;
-                    case "PSG1": GiveWeapon(MGS.PSG1, Weap); break;
-                    case "psg1": GiveWeapon(MGS.PSG1, Weap); break;
-                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
-                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Every Weapon!!", Weap, Context.User.Mention)); break;
+                    case "Cigs": Giveeth(MGS.Cig, Weap); break;
+                    case "cigs": Giveeth(MGS.Cig, Weap); break;
+                    case "Scope": Giveeth(MGS.Scope, Weap); break;
+                    case "scope": Giveeth(MGS.Scope, Weap); break;
+                    case "Cardboard Box A": Giveeth(MGS.CardboardBoxA, Weap); break;
+                    case "Box A": Giveeth(MGS.CardboardBoxA, Weap); break;
+                    case "Cardboard Box B": Giveeth(MGS.CardboardBoxB, Weap); break;
+                    case "Box B": Giveeth(MGS.CardboardBoxB, Weap); break;
+                    case "Cardboard Box C": Giveeth(MGS.CardboardBoxC, Weap); break;
+                    case "Box C": Giveeth(MGS.CardboardBoxC, Weap); break;
+                    case "Night Vision Goggles": Giveeth(MGS.NVG, Weap); break;
+                    case "NVG": Giveeth(MGS.NVG, Weap); break;
+                    case "Thermal Goggles": Giveeth(MGS.ThermG, Weap); break;
+                    case "ThermG": Giveeth(MGS.ThermG, Weap); break;
+                    case "Gas Mask": Giveeth(MGS.GasM, Weap); break;
+                    case "GMask": Giveeth(MGS.GasM, Weap); break;
+                    case "Body Armor": Giveeth(MGS.BodyArmor, Weap); break;
+                    case "B Armor": Giveeth(MGS.BodyArmor, Weap); break;
+                    case "Ketchup": Giveeth(MGS.Ketchup, Weap); break;
+                    case "kethcup": Giveeth(MGS.Ketchup, Weap); break;
+
+                    case "Stealth": Giveeth(MGS.Stealth, Weap); break;
+                    case "Camo": Giveeth(MGS.Stealth, Weap); break;
+                    case "Bandanna": Giveeth(MGS.Bandanna, Weap); break;
+                    case "bandanna": Giveeth(MGS.Bandanna, Weap); break;
+                    case "Camera": Giveeth(MGS.Camera, Weap); break;
+                    case "camera": Giveeth(MGS.Camera, Weap); break;
+                    case "Ration": Giveeth(MGS.Ration, Weap); break;
+                    case "ration": Giveeth(MGS.Ration, Weap); break;
+                    case "Medicine": Giveeth(MGS.Medicine, Weap); break;
+                    case "medicine": Giveeth(MGS.Medicine, Weap); break;
+                    case "Diazepam": Giveeth(MGS.NVG, Weap); break;
+                    case "diazepam": Giveeth(MGS.NVG, Weap); break;
+                    case "PAL": Giveeth(MGS.PalKey, Weap); break;
+                    case "Pal Key": Giveeth(MGS.PalKey, Weap); break;
+                    case "KeyCard": Giveeth(MGS.KeyCard, Weap); break;
+                    case "Key": Giveeth(MGS.KeyCard, Weap); break;
+                    case "Mine Detector": Giveeth(MGS.MineDetector, Weap); break;
+                    case "Mine D": Giveeth(MGS.MineDetector, Weap); break;
+                    case "Disc": Giveeth(MGS.Disc, Weap); break;
+                    case "disc": Giveeth(MGS.Disc, Weap); break;
+                    case "Rope": Giveeth(MGS.Rope, Weap); break;
+                    case "rope": Giveeth(MGS.Rope, Weap); break;
+                    case "Handkerchief": Giveeth(MGS.Handkerchief, Weap); break;
+                    case "handkerchief": Giveeth(MGS.Handkerchief, Weap); break;
+                    case "Suppressor": Giveeth(MGS.Suppressor, Weap); break;
+                    case "suppressor": Giveeth(MGS.Suppressor, Weap); break;
+                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
+                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
                 }
             }
         }
@@ -181,26 +209,52 @@ namespace RTEBot.Games
                 byte[] take = { 0xFF, 0xFF };
                 switch (Weap)
                 {
-                    case "Socom": TakeWeapon(MGS.Socom, Weap); break;
-                    case "socom": TakeWeapon(MGS.Socom, Weap); break;
-                    case "Famas": TakeWeapon(MGS.Famas, Weap); break;
-                    case "famas": TakeWeapon(MGS.Famas, Weap); break;
-                    case "Grenade": TakeWeapon(MGS.Grenade, Weap); break;
-                    case "grenade": TakeWeapon(MGS.Grenade, Weap); break;
-                    case "Nikita": TakeWeapon(MGS.Nikita, Weap); break;
-                    case "nikita": TakeWeapon(MGS.Nikita, Weap); break;
-                    case "Stinger": TakeWeapon(MGS.Stinger, Weap); break;
-                    case "stinger": TakeWeapon(MGS.Stinger, Weap); break;
-                    case "Claymore": TakeWeapon(MGS.Claymore, Weap); break;
-                    case "claymore": TakeWeapon(MGS.Claymore, Weap); break;
-                    case "C4": TakeWeapon(MGS.C4, Weap); break;
-                    case "c4": TakeWeapon(MGS.C4, Weap); break;
-                    case "Stun Grenade": TakeWeapon(MGS.Stun_G, Weap); break;
-                    case "stun grenade": TakeWeapon(MGS.Stun_G, Weap); break;
-                    case "Chaff Grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
-                    case "chaff grenade": TakeWeapon(MGS.Chaff_G, Weap); break;
-                    case "PSG1": TakeWeapon(MGS.PSG1, Weap); break;
-                    case "psg1": TakeWeapon(MGS.PSG1, Weap); break;
+                    case "Cigs": Taketh(MGS.Cig, Weap); break;
+                    case "cigs": Taketh(MGS.Cig, Weap); break;
+                    case "Scope": Taketh(MGS.Scope, Weap); break;
+                    case "scope": Taketh(MGS.Scope, Weap); break;
+                    case "Cardboard Box A": Taketh(MGS.CardboardBoxA, Weap); break;
+                    case "Box A": Taketh(MGS.CardboardBoxA, Weap); break;
+                    case "Cardboard Box B": Taketh(MGS.CardboardBoxB, Weap); break;
+                    case "Box B": Taketh(MGS.CardboardBoxB, Weap); break;
+                    case "Cardboard Box C": Taketh(MGS.CardboardBoxC, Weap); break;
+                    case "Box C": Taketh(MGS.CardboardBoxC, Weap); break;
+                    case "Night Vision Goggles": Taketh(MGS.NVG, Weap); break;
+                    case "NVG": Taketh(MGS.NVG, Weap); break;
+                    case "Thermal Goggles": Taketh(MGS.ThermG, Weap); break;
+                    case "ThermG": Taketh(MGS.ThermG, Weap); break;
+                    case "Gas Mask": Taketh(MGS.GasM, Weap); break;
+                    case "GMask": Taketh(MGS.GasM, Weap); break;
+                    case "Body Armor": Taketh(MGS.BodyArmor, Weap); break;
+                    case "B Armor": Taketh(MGS.BodyArmor, Weap); break;
+                    case "Ketchup": Taketh(MGS.Ketchup, Weap); break;
+                    case "kethcup": Taketh(MGS.Ketchup, Weap); break;
+                    case "Stealth": Taketh(MGS.Stealth, Weap); break;
+                    case "Camo": Taketh(MGS.Stealth, Weap); break;
+                    case "Bandanna": Taketh(MGS.Bandanna, Weap); break;
+                    case "bandanna": Taketh(MGS.Bandanna, Weap); break;
+                    case "Camera": Taketh(MGS.Camera, Weap); break;
+                    case "camera": Taketh(MGS.Camera, Weap); break;
+                    case "Ration": Taketh(MGS.Ration, Weap); break;
+                    case "ration": Taketh(MGS.Ration, Weap); break;
+                    case "Medicine": Taketh(MGS.Medicine, Weap); break;
+                    case "medicine": Taketh(MGS.Medicine, Weap); break;
+                    case "Diazepam": Taketh(MGS.NVG, Weap); break;
+                    case "diazepam": Taketh(MGS.NVG, Weap); break;
+                    case "PAL": Taketh(MGS.PalKey, Weap); break;
+                    case "Pal Key": Taketh(MGS.PalKey, Weap); break;
+                    case "KeyCard": Taketh(MGS.KeyCard, Weap); break;
+                    case "Key": Taketh(MGS.KeyCard, Weap); break;
+                    case "Mine Detector": Taketh(MGS.MineDetector, Weap); break;
+                    case "Mine D": Taketh(MGS.MineDetector, Weap); break;
+                    case "Disc": Taketh(MGS.Disc, Weap); break;
+                    case "disc": Taketh(MGS.Disc, Weap); break;
+                    case "Rope": Taketh(MGS.Rope, Weap); break;
+                    case "rope": Taketh(MGS.Rope, Weap); break;
+                    case "Handkerchief": Taketh(MGS.Handkerchief, Weap); break;
+                    case "handkerchief": Taketh(MGS.Handkerchief, Weap); break;
+                    case "Suppressor": Taketh(MGS.Suppressor, Weap); break;
+                    case "suppressor": Taketh(MGS.Suppressor, Weap); break;
                     case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
                     case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
                 }
