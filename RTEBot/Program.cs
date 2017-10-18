@@ -7,7 +7,6 @@ using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Webhook;
-//350845704115322881
 namespace RTEBot
 {
     class Program
