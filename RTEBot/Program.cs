@@ -7,7 +7,6 @@ using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Webhook;
-//350845704115322881
 namespace RTEBot
 {
     class Program
@@ -24,8 +23,7 @@ namespace RTEBot
         {
             _client = new DiscordSocketClient();
 
-            var token = "MzU3OTQ5ODU4MTYzODUxMjgx.DM0VmQ.y5AtPuh9TykOtxJHiFAiTjYzonA";
-        
+            var token = "MzU3OTQ5ODU4MTYzODUxMjgx.DKHQLQ.5AKi_aMvBFQ9VMUsMkV0RqOGFU0";
             await _client.LoginAsync(TokenType.Bot, token);
 
             await _client.StartAsync();
