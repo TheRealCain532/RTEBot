@@ -74,8 +74,7 @@ namespace RTEBot.Games
             Extension.WriteBytes((uint)address, new byte[] { 0xFF, 0xFF});
             SendMessage(string.Format("{{1} Took your {0}!", Weapon, Context.User.Mention));
         }
-        [Command("GiveWeapon")]
-        [Alias("Give")]
+        [Command("Give")]
         public async Task _GiveWeapon(string Weap)
         {//Next time try ToLower or ToUpper :P dingus
             if (Variables.IsConnected)
@@ -97,19 +96,67 @@ namespace RTEBot.Games
                     case "claymore": Giveeth(MGS.Claymore, Weap); break;
                     case "C4": Giveeth(MGS.C4, Weap); break;
                     case "c4": Giveeth(MGS.C4, Weap); break;
-                    case "Stun Grenade": Giveeth(MGS.Stun_G, Weap); break;
-                    case "stun grenade": Giveeth(MGS.Stun_G, Weap); break;
-                    case "Chaff Grenade": Giveeth(MGS.Chaff_G, Weap); break;
-                    case "chaff grenade": Giveeth(MGS.Chaff_G, Weap); break;
+                    case "StunGrenade": Giveeth(MGS.Stun_G, Weap); break;
+                    case "stungrenade": Giveeth(MGS.Stun_G, Weap); break;
+                    case "ChaffGrenade": Giveeth(MGS.Chaff_G, Weap); break;
+                    case "chaffgrenade": Giveeth(MGS.Chaff_G, Weap); break;
                     case "PSG1": Giveeth(MGS.PSG1, Weap); break;
                     case "psg1": Giveeth(MGS.PSG1, Weap); break;
-                    //case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
-                    //case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
+
+                    case "Cigs": Giveeth(MGS.Cig, Weap); break;
+                    case "cigs": Giveeth(MGS.Cig, Weap); break;
+                    case "Scope": Giveeth(MGS.Scope, Weap); break;
+                    case "scope": Giveeth(MGS.Scope, Weap); break;
+                    case "CardboardBoxA": Giveeth(MGS.CardboardBoxA, Weap); break;
+                    case "BoxA": Giveeth(MGS.CardboardBoxA, Weap); break;
+                    case "CardboardBoxB": Giveeth(MGS.CardboardBoxB, Weap); break;
+                    case "BoxB": Giveeth(MGS.CardboardBoxB, Weap); break;
+                    case "CardboardBoxC": Giveeth(MGS.CardboardBoxC, Weap); break;
+                    case "BoxC": Giveeth(MGS.CardboardBoxC, Weap); break;
+                    case "NightVisionGoggles": Giveeth(MGS.NVG, Weap); break;
+                    case "NVG": Giveeth(MGS.NVG, Weap); break;
+                    case "ThermalGoggles": Giveeth(MGS.ThermG, Weap); break;
+                    case "ThermG": Giveeth(MGS.ThermG, Weap); break;
+                    case "GasMask": Giveeth(MGS.GasM, Weap); break;
+                    case "GMask": Giveeth(MGS.GasM, Weap); break;
+                    case "BodyArmor": Giveeth(MGS.BodyArmor, Weap); break;
+                    case "BArmor": Giveeth(MGS.BodyArmor, Weap); break;
+                    case "Ketchup": Giveeth(MGS.Ketchup, Weap); break;
+                    case "kethcup": Giveeth(MGS.Ketchup, Weap); break;
+                    case "Stealth": Giveeth(MGS.Stealth, Weap); break;
+                    case "Camo": Giveeth(MGS.Stealth, Weap); break;
+                    case "Bandana": Giveeth(MGS.Bandanna, Weap); break;
+                    case "bandana": Giveeth(MGS.Bandanna, Weap); break;
+                    case "Camera": Giveeth(MGS.Camera, Weap); break;
+                    case "camera": Giveeth(MGS.Camera, Weap); break;
+                    case "Ration": Extension.WriteBytes((uint)MGS.Ration, new byte[] { 0x04, 0x00 }); break;//Giveeth(MGS.Ration, Weap); break;
+                    case "ration": Extension.WriteBytes((uint)MGS.Ration, new byte[] { 0x04, 0x00 }); break;
+                    case "Medicine": Giveeth(MGS.Medicine, Weap); break;
+                    case "medicine": Giveeth(MGS.Medicine, Weap); break;
+                    case "Diazepam": Giveeth(MGS.NVG, Weap); break;
+                    case "diazepam": Giveeth(MGS.NVG, Weap); break;
+                    case "Pal": Giveeth(MGS.PalKey, Weap); break;
+                    case "pal": Giveeth(MGS.PalKey, Weap); break;
+                    case "MineDetector": Giveeth(MGS.MineDetector, Weap); break;
+                    case "MineD": Giveeth(MGS.MineDetector, Weap); break;
+                    case "Rope": Giveeth(MGS.Rope, Weap); break;
+                    case "rope": Giveeth(MGS.Rope, Weap); break;
+                    case "Handkerchief": Giveeth(MGS.Handkerchief, Weap); break;
+                    case "handkerchief": Giveeth(MGS.Handkerchief, Weap); break;
+                    case "Suppressor": Giveeth(MGS.Suppressor, Weap); break;
+                    case "suppressor": Giveeth(MGS.Suppressor, Weap); break;
+
+                    case "PAL": Giveeth(MGS.PalKey, Weap); break;//Giveeth(MGS.PalKey, Weap); break;
+                    case "KeyCard": Giveeth(MGS.KeyCard, Weap); break;
+                    case "Key": Giveeth(MGS.KeyCard, Weap); break;
+                    case "Disc": Giveeth(MGS.Disc, Weap); break;
+                    case "disc": Giveeth(MGS.Disc, Weap); break;
+                        //case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
+                        //case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
                 }
             }
         }
-        [Command("TakeWeapon")]
-        [Alias("Take")]
+        [Command("Take")]
         public async Task _TakeWeapon(string Weap)
         {
             if (Variables.IsConnected)
@@ -137,133 +184,31 @@ namespace RTEBot.Games
                     case "chaff grenade": Taketh(MGS.Chaff_G, Weap); break;
                     case "PSG1": Taketh(MGS.PSG1, Weap); break;
                     case "psg1": Taketh(MGS.PSG1, Weap); break;
-                    case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
-                    case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
-                }
-            }
-        }
-        private byte[] STB(string hex)
-        {
-            if ((hex.Length % 2) > 0)
-            {
-                hex = "0" + hex;
-            }
-            int length = hex.Length;
-            byte[] buffer = new byte[((length / 2) - 1) + 1];
-            for (int i = 0; i < length; i += 2)
-            {
-                buffer[i / 2] = Convert.ToByte(hex.Substring(i, 2), 0x10);
-            }
-            return buffer;
-        }
 
-        [Command("GiveItem")]
-        [Alias("Give")]
-        public async Task _GiveItem2(string Weap, string amt)
-        {
-            if (Variables.IsConnected)
-            {
-                switch(Weap)
-                {
-                    case "PAL": Extension.WriteBytes((uint)MGS.PalKey, STB(amt)); break;//Giveeth(MGS.PalKey, Weap); break;
-                    case "Pal Key": Extension.WriteBytes((uint)MGS.PalKey, STB(amt)); break;//Giveeth(MGS.PalKey, Weap); break;
-                    case "KeyCard": Extension.WriteBytes((uint)MGS.KeyCard, STB(amt)); break;
-                    case "Key": Extension.WriteBytes((uint)MGS.KeyCard, STB(amt)); break;
-                    case "Disc": Extension.WriteBytes((uint)MGS.Disc, STB(amt)); break;
-                    case "disc": Extension.WriteBytes((uint)MGS.Disc, STB(amt)); break;
-                }
-            }
-        }
-        [Command("Giveitem")]
-        [Alias("Give")]
-        public async Task _GiveItem(string Weap)
-        {
-            if (Variables.IsConnected)
-            {
-                byte[] give = { 0x14, 0x00 };
-                switch (Weap)
-                {
-                    case "Cigs": Giveeth(MGS.Cig, Weap); break;
-                    case "cigs": Giveeth(MGS.Cig, Weap); break;
-                    case "Scope": Giveeth(MGS.Scope, Weap); break;
-                    case "scope": Giveeth(MGS.Scope, Weap); break;
-                    case "Cardboard Box A": Giveeth(MGS.CardboardBoxA, Weap); break;
-                    case "Box A": Giveeth(MGS.CardboardBoxA, Weap); break;
-                    case "Cardboard Box B": Giveeth(MGS.CardboardBoxB, Weap); break;
-                    case "Box B": Giveeth(MGS.CardboardBoxB, Weap); break;
-                    case "Cardboard Box C": Giveeth(MGS.CardboardBoxC, Weap); break;
-                    case "Box C": Giveeth(MGS.CardboardBoxC, Weap); break;
-                    case "Night Vision Goggles": Giveeth(MGS.NVG, Weap); break;
-                    case "NVG": Giveeth(MGS.NVG, Weap); break;
-                    case "Thermal Goggles": Giveeth(MGS.ThermG, Weap); break;
-                    case "ThermG": Giveeth(MGS.ThermG, Weap); break;
-                    case "Gas Mask": Giveeth(MGS.GasM, Weap); break;
-                    case "GMask": Giveeth(MGS.GasM, Weap); break;
-                    case "Body Armor": Giveeth(MGS.BodyArmor, Weap); break;
-                    case "B Armor": Giveeth(MGS.BodyArmor, Weap); break;
-                    case "Ketchup": Giveeth(MGS.Ketchup, Weap); break;
-                    case "kethcup": Giveeth(MGS.Ketchup, Weap); break;
-                    case "Stealth": Giveeth(MGS.Stealth, Weap); break;
-                    case "Camo": Giveeth(MGS.Stealth, Weap); break;
-                    case "Bandanna": Giveeth(MGS.Bandanna, Weap); break;
-                    case "bandanna": Giveeth(MGS.Bandanna, Weap); break;
-                    case "Camera": Giveeth(MGS.Camera, Weap); break;
-                    case "camera": Giveeth(MGS.Camera, Weap); break;
-                    case "Ration": Extension.WriteBytes((uint)MGS.Ration, new byte[] { 0x04, 0x00 });break;//Giveeth(MGS.Ration, Weap); break;
-                    case "ration": Extension.WriteBytes((uint)MGS.Ration, new byte[] { 0x04, 0x00 }); break;
-                    case "Medicine": Giveeth(MGS.Medicine, Weap); break;
-                    case "medicine": Giveeth(MGS.Medicine, Weap); break;
-                    case "Diazepam": Giveeth(MGS.NVG, Weap); break;
-                    case "diazepam": Giveeth(MGS.NVG, Weap); break;
-                    case "Pal": Giveeth(MGS.PalKey, Weap); break;
-                    case "pal": Giveeth(MGS.PalKey, Weap); break;
-                    case "Mine Detector": Giveeth(MGS.MineDetector, Weap); break;
-                    case "Mine D": Giveeth(MGS.MineDetector, Weap); break;
-
-                    case "Rope": Giveeth(MGS.Rope, Weap); break;
-                    case "rope": Giveeth(MGS.Rope, Weap); break;
-                    case "Handkerchief": Giveeth(MGS.Handkerchief, Weap); break;
-                    case "handkerchief": Giveeth(MGS.Handkerchief, Weap); break;
-                    case "Suppressor": Giveeth(MGS.Suppressor, Weap); break;
-                    case "suppressor": Giveeth(MGS.Suppressor, Weap); break;
-                    //case "All": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
-                    //case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, give); SendMessage(string.Format("{1} Gave you Everything!!", Weap, Context.User.Mention)); break;
-                }
-            }
-        }
-        [Command("Takeitem")]
-        [Alias("Take")]
-        public async Task _Takeitem(string Weap)
-        {
-            if (Variables.IsConnected)
-            {
-                byte[] take = { 0xFF, 0xFF };
-                switch (Weap)
-                {
                     case "Cigs": Taketh(MGS.Cig, Weap); break;
                     case "cigs": Taketh(MGS.Cig, Weap); break;
                     case "Scope": Taketh(MGS.Scope, Weap); break;
                     case "scope": Taketh(MGS.Scope, Weap); break;
-                    case "Cardboard Box A": Taketh(MGS.CardboardBoxA, Weap); break;
-                    case "Box A": Taketh(MGS.CardboardBoxA, Weap); break;
-                    case "Cardboard Box B": Taketh(MGS.CardboardBoxB, Weap); break;
-                    case "Box B": Taketh(MGS.CardboardBoxB, Weap); break;
-                    case "Cardboard Box C": Taketh(MGS.CardboardBoxC, Weap); break;
-                    case "Box C": Taketh(MGS.CardboardBoxC, Weap); break;
-                    case "Night Vision Goggles": Taketh(MGS.NVG, Weap); break;
+                    case "CardboardBoxA": Taketh(MGS.CardboardBoxA, Weap); break;
+                    case "BoxA": Taketh(MGS.CardboardBoxA, Weap); break;
+                    case "CardboardBoxB": Taketh(MGS.CardboardBoxB, Weap); break;
+                    case "BoxB": Taketh(MGS.CardboardBoxB, Weap); break;
+                    case "CardboardBoxC": Taketh(MGS.CardboardBoxC, Weap); break;
+                    case "BoxC": Taketh(MGS.CardboardBoxC, Weap); break;
+                    case "NightVisionGoggles": Taketh(MGS.NVG, Weap); break;
                     case "NVG": Taketh(MGS.NVG, Weap); break;
-                    case "Thermal Goggles": Taketh(MGS.ThermG, Weap); break;
+                    case "ThermalGoggles": Taketh(MGS.ThermG, Weap); break;
                     case "ThermG": Taketh(MGS.ThermG, Weap); break;
                     case "Gas Mask": Taketh(MGS.GasM, Weap); break;
                     case "GMask": Taketh(MGS.GasM, Weap); break;
-                    case "Body Armor": Taketh(MGS.BodyArmor, Weap); break;
-                    case "B Armor": Taketh(MGS.BodyArmor, Weap); break;
+                    case "BodyArmor": Taketh(MGS.BodyArmor, Weap); break;
+                    case "BArmor": Taketh(MGS.BodyArmor, Weap); break;
                     case "Ketchup": Taketh(MGS.Ketchup, Weap); break;
                     case "kethcup": Taketh(MGS.Ketchup, Weap); break;
                     case "Stealth": Taketh(MGS.Stealth, Weap); break;
                     case "Camo": Taketh(MGS.Stealth, Weap); break;
-                    case "Bandanna": Taketh(MGS.Bandanna, Weap); break;
-                    case "bandanna": Taketh(MGS.Bandanna, Weap); break;
+                    case "Bandana": Taketh(MGS.Bandanna, Weap); break;
+                    case "bandana": Taketh(MGS.Bandanna, Weap); break;
                     case "Camera": Taketh(MGS.Camera, Weap); break;
                     case "camera": Taketh(MGS.Camera, Weap); break;
                     case "Ration": Taketh(MGS.Ration, Weap); break;
@@ -290,6 +235,20 @@ namespace RTEBot.Games
                     case "all": foreach (var item in Enum.GetValues(typeof(MGS))) Extension.WriteBytes((uint)item, take); SendMessage(string.Format("{1} Took EVERYTHING!!", Weap, Context.User.Mention)); break;
                 }
             }
+        }
+        private byte[] STB(string hex)
+        {
+            if ((hex.Length % 2) > 0)
+            {
+                hex = "0" + hex;
+            }
+            int length = hex.Length;
+            byte[] buffer = new byte[((length / 2) - 1) + 1];
+            for (int i = 0; i < length; i += 2)
+            {
+                buffer[i / 2] = Convert.ToByte(hex.Substring(i, 2), 0x10);
+            }
+            return buffer;
         }
         [Command("CheckHealth")]
         [Alias("GetHealth", "HP")]

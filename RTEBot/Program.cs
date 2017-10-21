@@ -24,7 +24,7 @@ namespace RTEBot
         {
             _client = new DiscordSocketClient();
 
-            var token = "MzU3OTQ5ODU4MTYzODUxMjgx.DM0RGQ.hcZiHGoyaDrnNoWrdL425z9Zghs";
+            var token = "MzU3OTQ5ODU4MTYzODUxMjgx.DM0VmQ.y5AtPuh9TykOtxJHiFAiTjYzonA";
         
             await _client.LoginAsync(TokenType.Bot, token);
 
