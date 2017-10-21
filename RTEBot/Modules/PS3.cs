@@ -19,7 +19,7 @@ namespace RTEBot.Modules
             await Context.Channel.SendMessageAsync(input);
         }
 
-        private Boolean ConnectPSX(string IP = "192.168.0.13")
+        private Boolean ConnectPSX(string IP = "192.168.0.10")
         {
             if (GS.Connect()) return true;
             else return false;
