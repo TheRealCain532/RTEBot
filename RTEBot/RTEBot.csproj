@@ -84,7 +84,7 @@
     </Reference>
     <Reference Include="MultiLib, Version=2.6.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MultiConsoleAPI\Functions\Functions\bin\Release\MultiLib.dll</HintPath>
+      <HintPath>..\..\repos\MultiConsoleAPI\Functions\Functions\bin\Release\MultiLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -160,6 +160,7 @@
   <ItemGroup>
     <Compile Include="CommandHandler.cs" />
     <Compile Include="Games\MGS_PSX.cs" />
+    <Compile Include="Modules\Core.cs" />
     <Compile Include="Modules\PS3.cs" />
     <Compile Include="Modules\Variables.cs" />
     <Compile Include="Program.cs" />
